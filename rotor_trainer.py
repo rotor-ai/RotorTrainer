@@ -8,7 +8,7 @@ from torch.utils.data.sampler import SubsetRandomSampler
 # Custom classes
 from label_generator import LabelGenerator
 from rotor_dataset import RotorDataset
-from simple_net import SimpleNet
+from models.simple_net import SimpleNet
 from train import train
 
 
@@ -35,7 +35,7 @@ def main():
 
     # Create model
     print("Creating model...")
-    model = SimpleNet()
+    model = SimpleNet(len(steering_label_generator.get_label_names()))
 
     # Initialize optimizer
     print("Initializing optimizer...")

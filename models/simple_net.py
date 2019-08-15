@@ -5,19 +5,30 @@ import torch.nn.functional as F
 
 class SimpleNet(nn.Module):
     
-    def __init__(self):
+    def __init__(self, num_labels):
         """
-        Creates an instance of the SimpleNet class
+        Creates an instance of the SimpleNet class. 
+        SimpleNet requires an input of size 64 x 64
+        :param num_labels: The final number of predicted labels
         """
+        
         super(SimpleNet, self).__init__()
-                
-        self.conv1 = nn.Conv2d(3, 6, kernel_size=3)
+
+        num_channels_1 = 3
+        num_channels_2 = 6
+        num_channels_3 = 12
+
+        full_size = 2352  # Must be tweaked depending on pooling values and convolutions
+        downsize_1 = 120
+        downsize_2 = 84
+        
+        self.conv1 = nn.Conv2d(num_channels_1, num_channels_2, kernel_size=3)
         torch.nn.init.xavier_uniform_(self.conv1.weight)
-        self.conv2 = nn.Conv2d(6, 12, kernel_size=3)
+        self.conv2 = nn.Conv2d(num_channels_2, num_channels_3, kernel_size=3)
         torch.nn.init.xavier_uniform_(self.conv2.weight)
-        self.fc1 = nn.Linear(2352, 120)
-        self.fc2 = nn.Linear(120, 84)
-        self.fc3 = nn.Linear(84, 5)
+        self.fc1 = nn.Linear(full_size, downsize_1)
+        self.fc2 = nn.Linear(downsize_1, downsize_2)
+        self.fc3 = nn.Linear(downsize_2, num_labels)
         
         
     def forward(self, x):

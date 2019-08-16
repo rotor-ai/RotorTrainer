@@ -18,6 +18,7 @@ def rotor_trainer():
     num_epochs = 10
     validation_split = .1
     batch_size = 20
+    learning_rate = 0.1
     steering_label_names = ['left', 'half_left', 'neutral', 'half_right', 'right']
     steering_value_range = (-1, 1)
 
@@ -35,11 +36,11 @@ def rotor_trainer():
 
     # Create model
     print("Creating model...")
-    model = SimpleNet(len(steering_label_generator.get_label_names()))
+    model = SimpleNet()
 
     # Initialize optimizer
     print("Initializing optimizer...")
-    optimizer = optim.SGD(model.parameters(), lr=0.1)
+    optimizer = optim.SGD(model.parameters(), lr=learning_rate)
 
     # Create training and validation loaders
     data_size = len(dataset)

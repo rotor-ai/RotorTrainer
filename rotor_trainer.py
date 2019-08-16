@@ -12,7 +12,7 @@ from models.simple_net import SimpleNet
 from train import train
 
 
-def main():
+def rotor_trainer():
 
     # Initialize parameters
     num_epochs = 10
@@ -61,8 +61,21 @@ def main():
         model, loss, accuracy = train(epoch, model, optimizer, train_loader, validation_loader)
         loss_list.extend(loss)
         accuracy_list.append(accuracy)
+
+    # Print model's state_dict
+    print("Model's state_dict:")
+    for param_tensor in model.state_dict():
+        print(param_tensor, "\t", model.state_dict()[param_tensor].size())
+
+    # Print optimizer's state_dict
+    print("Optimizer's state_dict:")
+    for var_name in optimizer.state_dict():
+        print(var_name, "\t", optimizer.state_dict()[var_name])
+
+    # Save the model
+    torch.save(model.state_dict(), 'output/simple_net.pth')
         
 
 if __name__ == '__main__':
 
-    main()
+    rotor_trainer()

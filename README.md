@@ -4,9 +4,6 @@ The RotorTrainer library supplies scripts for training various neural net models
 
 <img src="https://github.com/rotor-ai/RotorTrainer/blob/master/images/157_cam-image_array_.jpg">
 
-Example 128x128 jpg input data
-
-{% include image.html url="/images/157_cam-image_array_.jpg" description="Example 128x128 jpg input image data" %}
 
 <figure class="image">
     <img src="/images/157_cam-image_array_.jpg" alt="Example 128x128 jpg input image data">

@@ -2,6 +2,9 @@
 
 The RotorTrainer library supplies scripts for training various neural net models for use on an Android device. It is designed to be trained and implemented for the Rotor Vehicle ai agent, but can be used for any neural net classifier. All specific input requirements are listed in the descriptions of the models.
 
+Example 128x128 jpg input data:
+<img src="https://github.com/rotor-ai/RotorTrainer/blob/master/images/157_cam-image_array_.jpg">
+
 ### Prerequisites
 
 The rotor trainer library uses the following dependencies among others:

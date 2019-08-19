@@ -23,18 +23,21 @@ def convert_to_tensorflow(pytorch_model_path, model_class):
     
     print("Loading trained model...")
     trained_model = model_class()
-    trained_model.load_state_dict(torch.load('output/simple_net.pth'))
+    trained_model.load_state_dict(torch.load(pytorch_model_path))
 
     # Export the trained model to ONNX
     print("Exporting model to ONNX...")
-    dummy_input = Variable(torch.randn(1, 3, 64, 64))
+    input_size = trained_model.get_input_size()
+    dummy_input = Variable(torch.randn(input_size))
     torch.onnx.export(trained_model, dummy_input, onnx_path)
 
     # Create Tensorflow Representation
     print("Creating tensorflow representation...")
     onnx_model = onnx.load(onnx_path)
     tf_rep = prepare(onnx_model)
-    tf_rep.export_graph('output/mnist.pb')
+
+    print("Saving tensorflow graph...")
+    tf_rep.export_graph(tf_path)
 
 
 if __name__ == '__main__':

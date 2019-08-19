@@ -13,7 +13,11 @@ class SimpleNet(nn.Module):
 
         super(SimpleNet, self).__init__()
 
-        num_channels_1 = 3
+        self.input_channels = 3
+        self.input_width = 64
+        self.input_height = 64
+
+        num_channels_1 = self.input_channels
         num_channels_2 = 6
         num_channels_3 = 12
 
@@ -51,3 +55,8 @@ class SimpleNet(nn.Module):
             num_flat_features *= s
             
         return num_flat_features
+
+    
+    def get_input_size(self):
+
+        return (1, self.input_channels, self.input_height, self.input_width)
